@@ -4,4 +4,7 @@ function calculate_area(radius){
 function calculate_perimeter(radius){
     return 3.14*2*radius;
 }
-GPUShaderModule.exports = calculate_area
+module.exports = {
+    calculate_area,
+    calculate_perimeter
+};
