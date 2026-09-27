@@ -1,33 +1,31 @@
-// import { log } from "console";
-// import fs from "fs";
+const fs = require("fs");
+const path = require("path");
 
-// setTimeout(()=>{
-//     console.log("setTimeOut");
-// }, 1000);
+console.log("--- Event Loop Execution Demo ---");
 
-// fs.readFile("intro.txt","utf8", (err,data)=>{
-//     console.log("file read completed")
-// })
+// Top-level timer vs immediate
+setTimeout(() => {
+    console.log("Top-level setTimeout (0ms)");
+}, 0);
 
-// setInterval(()=>{
-//     console.log("set interval after 5ms");
-// },500);
+setImmediate(() => {
+    console.log("Top-level setImmediate");
+});
 
+// Inside an I/O callback, setImmediate always runs before setTimeout
+const filePath = path.join(__dirname, "intro.txt");
+fs.readFile(filePath, "utf8", (err, data) => {
+    if (err) {
+        console.error("Error reading file:", err.message);
+        return;
+    }
+    console.log("1. I/O Callback: File read completed ->", data.trim());
 
-// setImmediate(()=>{
-//     console.log("set Immediate ");
-// });
+    setTimeout(() => {
+        console.log("3. Nested setTimeout (Timers phase)");
+    }, 0);
 
-setTimeout(()=>{
-    console.log("timeout")
-},100)
-
-setImmediate(()=>{
-    console.log("immediate")
-})
-
-FileSystem.readline("intro.txt", "utf8", (err,data)=>{
-    console.log("file read completed");
-    setTimeout()
-    setImmediate()
-})
+    setImmediate(() => {
+        console.log("2. Nested setImmediate (Check phase - executes before setTimeout inside I/O)");
+    });
+});
