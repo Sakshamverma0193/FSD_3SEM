@@ -1,22 +1,27 @@
-import http from 'http';
-import fs from 'fs';
-const data = fs.readFileSync("index.html");
-const server = http.createServer((req, res) => {
-    console.log("Hello World")
-    const order ={
-        id: 1,
-        name: "Pizza",
-        price: 100,
-        dest: "Delhi"
-    };
+const http = require("http");
+const fs = require("fs");
+const path = require("path");
 
-    console.log(`${data}`);
-    res.writeHead(404, {
-        "Content-Type": "text/html",
-        "custom-header": "Hello ECE"
+const htmlFilePath = path.join(__dirname, "index.html");
+
+const server = http.createServer((req, res) => {
+    fs.readFile(htmlFilePath, "utf8", (err, data) => {
+        if (err) {
+            res.writeHead(500, { "Content-Type": "text/plain" });
+            res.end("Internal Server Error: Unable to load page");
+            return;
+        }
+
+        res.writeHead(200, {
+            "Content-Type": "text/html",
+            "custom-header": "Hello ECE"
+        });
+        res.end(data);
     });
-    res.end(data);
-})
-server.listen(3000, "127.0.0.1", () =>{
-    console.log("Server is running..."); 
-})
+});
+
+const PORT = 3000;
+const HOST = "127.0.0.1";
+server.listen(PORT, HOST, () => {
+    console.log(`Server is running at http://${HOST}:${PORT}/`);
+});

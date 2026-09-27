@@ -1,8 +1,8 @@
-status code    meaning 
-200            ok
-201            create 
-400            bad request
-401            autharization
-403            forbidden
-404            Page not found
-500            Internal server error
+Status Code    Meaning
+200            OK
+201            Created
+400            Bad Request
+401            Unauthorized
+403            Forbidden
+404            Not Found
+500            Internal Server Error
