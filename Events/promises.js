@@ -11,12 +11,12 @@ const promise1 = new Promise((resolve, reject)=>{
     }
 })
 promise1
-.then((response) => {
-    console.log(response);
-})
-.catch((error)=>{
-    console.log(error);
-})
+    .then((response) => {
+        console.log("Promise 1 resolved:", response);
+    })
+    .catch((error) => {
+        console.error("Promise 1 error:", error);
+    });
 
 
 
@@ -37,12 +37,12 @@ const promise2 = new Promise((resolve, reject)=>{
     }
 })
 promise2
-.then((response) => {
-    console.log(response);
-})
-.catch((error)=>{
-    console.log(error);
-})
+    .then((response) => {
+        console.log("Promise 2 resolved:", response);
+    })
+    .catch((error) => {
+        console.error("Promise 2 error:", error);
+    });
 
 
 
@@ -50,13 +50,14 @@ promise2
 
 
 
+// Promise.all: Wait for all promises
 Promise.all([promise1, promise2])
-.then((response)=>{
-    console.log(response);
-})
-.catch((error)=>{
-    console.log(error);
-})
+    .then((response) => {
+        console.log("Promise.all:", response);
+    })
+    .catch((error) => {
+        console.error("Promise.all error:", error);
+    });
 
 
 
@@ -64,23 +65,25 @@ Promise.all([promise1, promise2])
 
 
 
+// Promise.race: First settled promise
 Promise.race([promise1, promise2])
-.then((response)=>{
-    console.log(response);
-})
-.catch((error)=>{
-    console.log(error);
-})
+    .then((response) => {
+        console.log("Promise.race:", response);
+    })
+    .catch((error) => {
+        console.error("Promise.race error:", error);
+    });
 
 
 
 
 
 
+// Promise.allSettled: All settled promises with status
 Promise.allSettled([promise1, promise2])
-.then((response)=>{
-    console.log(response);
-})
-.catch((error)=>{
-    console.log(error);
-})
+    .then((response) => {
+        console.log("Promise.allSettled:", response);
+    })
+    .catch((error) => {
+        console.error("Promise.allSettled error:", error);
+    });
